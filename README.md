@@ -1,7 +1,6 @@
-# README
+# Fantasy Tennis
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Project created by Lazar Kostic, Marko Milanovic and Nikola Golubovic.
 
 Things you may want to cover:
 
@@ -20,6 +19,3 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
-# fantasy-tennis
