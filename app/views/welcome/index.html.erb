@@ -1,0 +1,10 @@
+<h1>Fantasy Tennis</h1>
+<p>The best tennis app for amateur players around the globe!</p>
+
+<% if current_user %>
+  Logged in user: <%= current_user.email %><br />
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %><br />
+<% else %>
+    <%= link_to 'Sign in', new_user_session_path %><br />
+    <%= link_to 'Sign up', new_user_registration_path %><br />
+<% end %>
