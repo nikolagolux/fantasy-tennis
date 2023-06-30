@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+
+ * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Belanosima', sans-serif;
+  }
+
+.authentication-container {
+    background: #1E2631;
+    width: 100vw;
+    height: 100vh;
+    color: whitesmoke;
+    text-align: center;
+    padding-top: 30vh;
+}
+
+.authentication-heading {
+  color: green;
+  margin: 20px 20px;
+}
+
+.authentication-field input {
+  background-color: whitesmoke;
+  min-width: 400px;
+  text-align: center;
+  margin: 10px 10px;
+  font: 16px;
+  height: 20px;
+}
+
+.authentication-button {
+  background-color: green;
+  color: whitesmoke;
+  width: 400px;
+  text-align: center;
+  margin: 10px 10px;
+  font: 16px;
+  height: 25px;
+}
