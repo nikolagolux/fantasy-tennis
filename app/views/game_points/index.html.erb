@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Game Points</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gem</th>
+      <th>Set</th>
+      <th>Match</th>
+      <th>Is first player win</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_points.each do |game_point| %>
+      <tr>
+        <td><%= game_point.gem_id %></td>
+        <td><%= game_point.set_id %></td>
+        <td><%= game_point.match_id %></td>
+        <td><%= game_point.is_first_player_win %></td>
+        <td><%= link_to 'Show', game_point %></td>
+        <td><%= link_to 'Edit', edit_game_point_path(game_point) %></td>
+        <td><%= link_to 'Destroy', game_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game Point', new_game_point_path %>

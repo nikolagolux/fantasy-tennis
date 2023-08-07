@@ -1,0 +1,67 @@
+<%= form_with(model: match) do |form| %>
+  <% if match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+        <% match.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_player_id %>
+    <%= form.collection_select :first_player_id, User.order(:last_name),:id,:full_name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_player_id %>
+    <%= form.collection_select :second_player_id, User.order(:last_name),:id,:full_name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :match_datetime %>
+    <%= form.datetime_select :match_datetime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_match_started %>
+    <%= form.check_box :is_match_started %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_match_finished %>
+    <%= form.check_box :is_match_finished %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_first_player_win %>
+    <%= form.check_box :is_first_player_win %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_first_player_surrender %>
+    <%= form.check_box :is_first_player_surrender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_second_player_surrender %>
+    <%= form.check_box :is_second_player_surrender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_player_sets %>
+    <%= form.number_field :first_player_sets %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_player_sets %>
+    <%= form.number_field :second_player_sets %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

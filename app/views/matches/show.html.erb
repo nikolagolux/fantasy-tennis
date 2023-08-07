@@ -1,0 +1,103 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="match-container">
+  <div class="match-column">
+    <p>First player</p>
+    <h2>
+      <%= User.find(@match.first_player_id).full_name %>
+    </h2>
+
+    <button>Poen</button>
+    <br><br><br>
+    <button>Predao meč</button>
+  </div>
+
+  <div class="match-column">
+    <h2>Prikaz meča</h2>
+     
+    <% if @match.is_match_started && !@match.is_match_finished %>
+      <p>Meč je startovan</p>
+    <% elsif @match.is_match_started && @match.is_match_finished %>
+      <p>Meč je završen</p>
+    <% else %>
+      <p>Meč još nije startovan</p>
+    <% end %>
+
+    <p>
+      <strong>Match datetime:</strong>
+      <%= @match.match_datetime %>
+    </p>
+
+    <% @match.game_sets.each do |set| %>
+      <% if set.is_first_player_win == nil %>
+        0 : 0
+      <% elsif !!set.is_first_player_win %>
+        1 : 0
+      <% elsif !set.is_first_player_win %>
+        0 : 1
+      <% end %>
+    <% end %>
+
+    <h2>Result</h2>
+    
+    <p>
+      <%= @match.first_player_sets %> : <%= @match.second_player_sets %>
+    </p>
+    
+    <% @match.game_sets.each do |set| %>
+      <% set.game_gems.each do |gem| %>
+        <% gem.game_points.each do |point| %>
+          <% if set.is_first_player_win %>
+            + : -
+          <% else %>
+            - : +
+          <% end %>
+        <% end %>
+        - - - - - - - -
+      <% end %>
+      <hr>
+    <% end %>
+  </div>
+
+  <div class="match-column">
+    <p>Second player</p>
+    <h2>
+      <%= User.find(@match.second_player_id).full_name %>
+    </h2>
+    <button>Poen</button>
+    <br><br><br>
+    <button>Predao meč</button>
+  </div>
+</div>
+
+
+<!--
+<p>
+  <strong>Is match started:</strong>
+  <%= @match.is_match_started %>
+</p>
+
+<p>
+  <strong>Is match finished:</strong>
+  <%= @match.is_match_finished %>
+</p>
+
+<p>
+  <strong>Is first player win:</strong>
+  <%= @match.is_first_player_win %>
+</p>
+
+<p>
+  <strong>Is first player surrender:</strong>
+  <%= @match.is_first_player_surrender %>
+</p>
+
+<p>
+  <strong>Is second player surrender:</strong>
+  <%= @match.is_second_player_surrender %>
+</p>
+-->
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

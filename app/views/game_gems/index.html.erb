@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Game Gems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Set</th>
+      <th>Match</th>
+      <th>Is first player win</th>
+      <th>First player points</th>
+      <th>Second player points</th>
+      <th>Is first player serve</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_gems.each do |game_gem| %>
+      <tr>
+        <td><%= game_gem.set_id %></td>
+        <td><%= game_gem.match_id %></td>
+        <td><%= game_gem.is_first_player_win %></td>
+        <td><%= game_gem.first_player_points %></td>
+        <td><%= game_gem.second_player_points %></td>
+        <td><%= game_gem.is_first_player_serve %></td>
+        <td><%= link_to 'Show', game_gem %></td>
+        <td><%= link_to 'Edit', edit_game_gem_path(game_gem) %></td>
+        <td><%= link_to 'Destroy', game_gem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game Gem', new_game_gem_path %>

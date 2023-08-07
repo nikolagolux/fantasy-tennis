@@ -52,3 +52,101 @@
   font: 16px;
   height: 25px;
 }
+
+
+
+
+.match-page {
+  background: #1E2631;
+  width: 100vw;
+  height: 100vh;
+  color: whitesmoke;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+.left-half {
+  float: left;
+  width: 50%;
+}
+
+.right-half {
+  float: left;
+  width: 50%;
+}
+
+.player {
+  text-align: center;
+}
+
+.player img {
+  border-radius: 50%;
+  /* border: 1px solid whitesmoke; */
+  background: whitesmoke;
+}
+
+.score-button {
+  display: block;
+  margin: 10px auto;
+}
+
+.resign-button {
+  display: block;
+  margin: 0 auto;
+}
+
+.match-info {
+  clear: both;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.start-button {
+  display: block;
+  margin: 10px auto;
+}
+
+.total-score {
+  display: flex;
+  justify-content: center;
+}
+
+.set-score {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-button {
+  background-color: cyan;
+  width: 250px;
+  height: 30px;
+  margin-bottom: 100px;
+  margin-top: 70px;
+}
+
+.resign-button {
+  background-color: orange;
+  width: 250px;
+  height: 30px;
+}
+
+.player p {
+  font-size: 32px;
+}
+
+.match-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.match-column {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid black;
+}

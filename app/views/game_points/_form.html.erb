@@ -1,0 +1,37 @@
+<%= form_with(model: game_point) do |form| %>
+  <% if game_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game_point.errors.count, "error") %> prohibited this game_point from being saved:</h2>
+
+      <ul>
+        <% game_point.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :gem_id %>
+    <%= form.text_field :gem_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :set_id %>
+    <%= form.text_field :set_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :match_id %>
+    <%= form.text_field :match_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_first_player_win %>
+    <%= form.check_box :is_first_player_win %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

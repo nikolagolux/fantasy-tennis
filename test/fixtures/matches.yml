@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_player_id: one
+  second_player_id: one
+  match_datetime: 2023-07-11 20:45:40
+  is_match_started: false
+  is_match_finished: false
+  is_first_player_win: false
+  is_first_player_surrender: false
+  is_second_player_surrender: false
+  first_player_sets: 1
+  second_player_sets: 1
+
+two:
+  first_player_id: two
+  second_player_id: two
+  match_datetime: 2023-07-11 20:45:40
+  is_match_started: false
+  is_match_finished: false
+  is_first_player_win: false
+  is_first_player_surrender: false
+  is_second_player_surrender: false
+  first_player_sets: 1
+  second_player_sets: 1

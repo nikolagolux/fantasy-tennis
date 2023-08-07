@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @game_set.match_id %>
+</p>
+
+<p>
+  <strong>Is first player win:</strong>
+  <%= @game_set.is_first_player_win %>
+</p>
+
+<p>
+  <strong>First player gems:</strong>
+  <%= @game_set.first_player_gems %>
+</p>
+
+<p>
+  <strong>Second player gems:</strong>
+  <%= @game_set.second_player_gems %>
+</p>
+
+<%= link_to 'Edit', edit_game_set_path(@game_set) %> |
+<%= link_to 'Back', game_sets_path %>

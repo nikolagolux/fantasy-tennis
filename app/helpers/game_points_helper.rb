@@ -1,0 +1,2 @@
+module GamePointsHelper
+end

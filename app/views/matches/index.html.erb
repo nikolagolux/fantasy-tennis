@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Matches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First player</th>
+      <th>Second player</th>
+      <th>Match datetime</th>
+      <th>Is match started</th>
+      <th>Is match finished</th>
+      <th>Is first player win</th>
+      <th>Is first player surrender</th>
+      <th>Is second player surrender</th>
+      <th>First player sets</th>
+      <th>Second player sets</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= User.find(match.first_player_id).full_name %></td>
+        <td><%= User.find(match.second_player_id).full_name %></td>
+        <td><%= match.match_datetime %></td>
+        <td><%= match.is_match_started %></td>
+        <td><%= match.is_match_finished %></td>
+        <td><%= match.is_first_player_win %></td>
+        <td><%= match.is_first_player_surrender %></td>
+        <td><%= match.is_second_player_surrender %></td>
+        <td><%= match.first_player_sets %></td>
+        <td><%= match.second_player_sets %></td>
+        <td><%= link_to 'Show', match %></td>
+        <td><%= link_to 'Edit', edit_match_path(match) %></td>
+        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Match', new_match_path %>

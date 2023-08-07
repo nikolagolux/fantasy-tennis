@@ -1,0 +1,24 @@
+<h1>Dashboard#users</h1>
+<p>Find me in app/views/dashboard/users.html.erb</p>
+
+<br>
+
+<h2>Number of users on the platform: <%= @number_of_users %></h2>
+
+<br>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Created at</th>
+    </tr>
+    <% @users.each do |u| %>
+    <tr>
+        <td><%= u.id %></td>
+        <td><%= u.email %></td>
+        <td><%= u.created_at.to_formatted_s(:long) %></td>
+    </tr>
+    <% end %>
+</table>
+

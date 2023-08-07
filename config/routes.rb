@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
+  resources :game_points
+  resources :game_gems
+  resources :game_sets
+  resources :matches
+  get 'matches/index'
+  get 'matches/show'
   devise_for :users
   root 'welcome#index'
+
+  get 'dashboard/index'
+  get 'dashboard/users'
   
   get 'welcome/index'
   get 'welcome/about'
