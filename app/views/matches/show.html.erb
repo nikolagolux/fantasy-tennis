@@ -1,18 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-
 <div class="match-container">
+  <!-- First Column -->
   <div class="match-column">
     <p>First player</p>
     <h2>
       <%= User.find(@match.first_player_id).full_name %>
     </h2>
 
-    <button>Poen</button>
+    <% @first_player_id = @match.first_player_id %>
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
+    <%= button_to 'Poen', add_point_path, method: :post, params: { 
+      game_point: {
+        is_first_player_win: true, 
+        match_id: @match.id, 
+        game_set_id: @match.game_sets.last.id, 
+        game_gem_id: @match.game_sets.last.game_gems.last.id 
+        }
+      } %>
     <br><br><br>
     <button>Predao meč</button>
   </div>
 
+  <!-- Second Column -->
   <div class="match-column">
     <h2>Prikaz meča</h2>
      
@@ -45,14 +66,28 @@
       <%= @match.first_player_sets %> : <%= @match.second_player_sets %>
     </p>
     
+    <h1>Lista svih setova</h1>
     <% @match.game_sets.each do |set| %>
+      <% if set.id %>
+        <p><strong><%= set.id %>. set na meču</strong></p>
+      <% else %>
+        <p><strong>1. set na meču</strong></p>
+      <% end %>
+
       <% set.game_gems.each do |gem| %>
+        <% if gem.id %>
+          <p><strong><%= gem.id %>. gem na meču</strong></p>
+        <% else %>
+          <p><strong>1. gem na meču</strong></p>
+        <% end %>
+
         <% gem.game_points.each do |point| %>
-          <% if set.is_first_player_win %>
-            + : -
+          <% if point.is_first_player_win %>
+            Dobio prvi igrač
           <% else %>
-            - : +
+            Dobio drugi igrač
           <% end %>
+          <br>
         <% end %>
         - - - - - - - -
       <% end %>
@@ -60,12 +95,20 @@
     <% end %>
   </div>
 
+  <!-- Third Column -->
   <div class="match-column">
     <p>Second player</p>
     <h2>
       <%= User.find(@match.second_player_id).full_name %>
     </h2>
-    <button>Poen</button>
+    <%= button_to 'Poen', add_point_path, method: :post, params: { 
+      game_point: {
+        is_first_player_win: false, 
+        match_id: @match.id, 
+        game_set_id: @match.game_sets.last.id, 
+        game_gem_id: @match.game_sets.last.game_gems.last.id 
+        }
+      } %>
     <br><br><br>
     <button>Predao meč</button>
   </div>

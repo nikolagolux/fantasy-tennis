@@ -22,10 +22,11 @@ class GamePointsController < ApplicationController
   # POST /game_points or /game_points.json
   def create
     @game_point = GamePoint.new(game_point_params)
+    @match = Match.find(params[:game_point][:match_id])
 
     respond_to do |format|
       if @game_point.save
-        format.html { redirect_to game_point_url(@game_point), notice: "Game point was successfully created." }
+        format.html { redirect_to match_url(@match), notice: "Game point was successfully created." }
         format.json { render :show, status: :created, location: @game_point }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +66,6 @@ class GamePointsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_point_params
-      params.require(:game_point).permit(:gem_id, :set_id, :match_id, :is_first_player_win)
+      params.require(:game_point).permit(:match_id, :game_set_id, :game_gem_id, :is_first_player_win)
     end
 end
