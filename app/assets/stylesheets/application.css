@@ -63,16 +63,18 @@
   color: whitesmoke;
   text-align: center;
   padding-top: 10vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 .left-half {
   float: left;
-  width: 50%;
+  width: 30%;
 }
 
 .right-half {
   float: left;
-  width: 50%;
+  width: 30%;
 }
 
 .player {
@@ -98,7 +100,7 @@
 .match-info {
   clear: both;
   text-align: center;
-  margin-top: 30px;
+  width: 40%;
 }
 
 .start-button {
@@ -149,4 +151,6 @@
   margin: 10px;
   padding: 20px;
   border: 1px solid black;
+  text-align: center;
 }
+

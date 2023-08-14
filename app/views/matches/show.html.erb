@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
+<div class="text-align">
 
-<div class="match-container">
+<div class="match-page">
   <!-- First Column -->
-  <div class="match-column">
-    <p>First player</p>
-    <h2>
-      <%= User.find(@match.first_player_id).full_name %>
-    </h2>
+  <div class="left-half">
+    <div class="player">
+      <p>First player</p>
+      <%= image_tag "djokovic.png" %>
+      <h2>
+        <%= User.find(@match.first_player_id).full_name %>
+      </h2>
+    </div>
+
+    <br><br><br><br><br><br><br>
 
     <% @first_player_id = @match.first_player_id %>
     <% if @match.game_sets.count == 0 %>
@@ -28,28 +34,28 @@
         game_set_id: @match.game_sets.last.id, 
         game_gem_id: @match.game_sets.last.game_gems.last.id 
         }
-      } %>
-    <br><br><br>
-    <button>Predao meč</button>
+      }, class: 'score-button' %>
+    <br><br><br><br><br><br>
+    <button class="resign-button">Predao meč</button>
   </div>
 
   <!-- Second Column -->
-  <div class="match-column">
-    <h2>Prikaz meča</h2>
+  <div class="match-info">
+    <h2 style="padding-bottom: 25px;">Prikaz meca</h2>
      
     <% if @match.is_match_started && !@match.is_match_finished %>
-      <p>Meč je startovan</p>
+      <h5>Mec je startovan</h5>
     <% elsif @match.is_match_started && @match.is_match_finished %>
-      <p>Meč je završen</p>
+      <h5>Meč je završen</h5>
     <% else %>
-      <p>Meč još nije startovan</p>
+      <h5>Meč još nije startovan</h5>
     <% end %>
 
-    <p>
+    <p style="padding-top: 15px">
       <strong>Match datetime:</strong>
       <%= @match.match_datetime %>
     </p>
-
+    <!--
     <% @match.game_sets.each do |set| %>
       <% if set.is_first_player_win == nil %>
         0 : 0
@@ -59,8 +65,8 @@
         0 : 1
       <% end %>
     <% end %>
-
-    <h2>Result</h2>
+    -->
+    <h2>Rezultat</h2>
     
     <p>
       <%= @match.first_player_sets %> : <%= @match.second_player_sets %>
@@ -96,11 +102,30 @@
   </div>
 
   <!-- Third Column -->
-  <div class="match-column">
-    <p>Second player</p>
-    <h2>
-      <%= User.find(@match.second_player_id).full_name %>
-    </h2>
+  <div class="right-half">
+    <div class="player">
+      <p>Second player</p>
+      <%= image_tag "nadal.png" %>
+      <h2>
+        <%= User.find(@match.second_player_id).full_name %>
+      </h2>
+    </div>
+
+    <br><br><br><br><br><br><br>
+
+    <% @first_player_id = @match.second_player_id %>
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
     <%= button_to 'Poen', add_point_path, method: :post, params: { 
       game_point: {
         is_first_player_win: false, 
@@ -108,9 +133,9 @@
         game_set_id: @match.game_sets.last.id, 
         game_gem_id: @match.game_sets.last.game_gems.last.id 
         }
-      } %>
-    <br><br><br>
-    <button>Predao meč</button>
+      }, class: 'score-button' %>
+    <br><br><br><br><br><br>
+    <button class="resign-button">Predao meč</button>
   </div>
 </div>
 
