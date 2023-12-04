@@ -53,13 +53,9 @@
   height: 25px;
 }
 
-
-
-
 .match-page {
   background: #1E2631;
   width: 100vw;
-  height: 100vh;
   color: whitesmoke;
   text-align: center;
   padding-top: 10vh;
@@ -152,5 +148,59 @@
   padding: 20px;
   border: 1px solid black;
   text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  width: calc(100% / 7);
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  width: 32%;  /* (100 - 3)% / 4 = 24.25% */
+  height: auto;
+  background-color: LightSkyBlue;
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.set-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.gem-container {
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #ddd;
 }
 

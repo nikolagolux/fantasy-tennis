@@ -1,0 +1,38 @@
+<div class="left-half">
+    <div class="player">
+      <p>First player</p>
+      <%= image_tag "djokovic.png" %>
+      <h2>
+        <%= User.find(@match.first_player_id).full_name %>
+      </h2>
+    </div>
+
+    <br><br><br><br><br><br><br>
+
+    <% @first_player_id = @match.first_player_id %>
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
+    <% if @match.game_sets.count == 0 %>
+      <% @sets = 1 %>
+    <% else %>
+      <% @sets = @match.game_sets.count %>
+    <% end %>
+
+    <!-- First player got the point -->
+    <% if @match.is_match_finished == false %>
+    <%= button_to 'Poen', add_point_path, method: :post, html: { id: "submit-button1" }, params: { 
+      game_point: {
+        is_first_player_win: true, 
+        match_id: @match.id, 
+        game_set_id: @match.game_sets.last.id, 
+        game_gem_id: @match.game_sets.last.game_gems.last.id 
+        }
+      }, class: 'score-button' %>
+    <br><br><br><br><br><br>
+    <%= button_to 'Predaj mec', predaj_match_path(:match_id => @match.id), method: :post %>
+    <% end %>
+  </div>

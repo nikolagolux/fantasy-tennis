@@ -1,171 +1,96 @@
-<p id="notice"><%= notice %></p>
-<div class="text-align">
+<div class="match-page"> 
+  
+  <%= render "first_column" %>
 
-<div class="match-page">
-  <!-- First Column -->
-  <div class="left-half">
-    <div class="player">
-      <p>First player</p>
-      <%= image_tag "djokovic.png" %>
-      <h2>
-        <%= User.find(@match.first_player_id).full_name %>
-      </h2>
-    </div>
-
-    <br><br><br><br><br><br><br>
-
-    <% @first_player_id = @match.first_player_id %>
-    <% if @match.game_sets.count == 0 %>
-      <% @sets = 1 %>
-    <% else %>
-      <% @sets = @match.game_sets.count %>
-    <% end %>
-
-    <% if @match.game_sets.count == 0 %>
-      <% @sets = 1 %>
-    <% else %>
-      <% @sets = @match.game_sets.count %>
-    <% end %>
-
-    <%= button_to 'Poen', add_point_path, method: :post, params: { 
-      game_point: {
-        is_first_player_win: true, 
-        match_id: @match.id, 
-        game_set_id: @match.game_sets.last.id, 
-        game_gem_id: @match.game_sets.last.game_gems.last.id 
-        }
-      }, class: 'score-button' %>
-    <br><br><br><br><br><br>
-    <button class="resign-button">Predao meč</button>
-  </div>
-
-  <!-- Second Column -->
+  <!-- Middle Column -->
   <div class="match-info">
-    <h2 style="padding-bottom: 25px;">Prikaz meca</h2>
-     
-    <% if @match.is_match_started && !@match.is_match_finished %>
-      <h5>Mec je startovan</h5>
-    <% elsif @match.is_match_started && @match.is_match_finished %>
-      <h5>Meč je završen</h5>
-    <% else %>
-      <h5>Meč još nije startovan</h5>
-    <% end %>
 
-    <p style="padding-top: 15px">
-      <strong>Match datetime:</strong>
-      <%= @match.match_datetime %>
-    </p>
-    <!--
-    <% @match.game_sets.each do |set| %>
-      <% if set.is_first_player_win == nil %>
-        0 : 0
-      <% elsif !!set.is_first_player_win %>
-        1 : 0
-      <% elsif !set.is_first_player_win %>
-        0 : 1
-      <% end %>
-    <% end %>
-    -->
-    <h2>Rezultat</h2>
-    
-    <p>
-      <%= @match.first_player_sets %> : <%= @match.second_player_sets %>
-    </p>
-    
-    <h1>Lista svih setova</h1>
-    <% @match.game_sets.each do |set| %>
-      <% if set.id %>
-        <p><strong><%= set.id %>. set na meču</strong></p>
-      <% else %>
-        <p><strong>1. set na meču</strong></p>
-      <% end %>
+    <%= render "status_meca" %>
+    <%= render "trenutni_rezultat_u_setovima" %>
 
-      <% set.game_gems.each do |gem| %>
-        <% if gem.id %>
-          <p><strong><%= gem.id %>. gem na meču</strong></p>
-        <% else %>
-          <p><strong>1. gem na meču</strong></p>
+    <!-- <p>Poslednji gem:</p>
+    <p><%= @match.game_sets.last.game_gems.last.first_player_points_2 %> : <%= @match.game_sets.last.game_gems.last.second_player_points_2 %></p>
+     -->
+
+    <br><h2>Lista svih setova</h2>
+
+    <% set_counter = @match.game_sets.count %>
+    <% @match.game_sets.order(created_at: :desc).each do |set| %>
+      <div class="set-container">
+        <p><strong><%= set_counter %>. set na mecu (<%= set.first_player_gems %> : <%= set.second_player_gems %>)</strong></p>
+        
+        <% gem_counter = set.game_gems.count %>
+        <% set.game_gems.order(created_at: :desc).each do |gem| %>
+          <div class="gem-container">
+            <p><strong><%= gem_counter %>. gem na mecu (gem_id=<%= gem.id %>)</strong></p>
+
+            <table>
+              <tr>
+                <th style="color: #1E2631;">Player 1</th>
+                <th style="color: #1E2631;">Player 2</th>
+              </tr>
+              <% gem.game_points.order(created_at: :desc).each do |point| %>
+                <tr>
+                  <td><%= point.current_first_player_points || 0 %></td>
+                  <td><%= point.current_second_player_points || 0 %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+          <% gem_counter -= 1 %>
         <% end %>
 
-        <% gem.game_points.each do |point| %>
-          <% if point.is_first_player_win %>
-            Dobio prvi igrač
-          <% else %>
-            Dobio drugi igrač
-          <% end %>
-          <br>
-        <% end %>
-        - - - - - - - -
-      <% end %>
-      <hr>
+        <hr/>
+      </div>
+      <% set_counter -= 1 %>
     <% end %>
+
   </div>
 
-  <!-- Third Column -->
-  <div class="right-half">
-    <div class="player">
-      <p>Second player</p>
-      <%= image_tag "nadal.png" %>
-      <h2>
-        <%= User.find(@match.second_player_id).full_name %>
-      </h2>
-    </div>
+  <%= render "third_column" %>
 
-    <br><br><br><br><br><br><br>
-
-    <% @first_player_id = @match.second_player_id %>
-    <% if @match.game_sets.count == 0 %>
-      <% @sets = 1 %>
-    <% else %>
-      <% @sets = @match.game_sets.count %>
-    <% end %>
-
-    <% if @match.game_sets.count == 0 %>
-      <% @sets = 1 %>
-    <% else %>
-      <% @sets = @match.game_sets.count %>
-    <% end %>
-
-    <%= button_to 'Poen', add_point_path, method: :post, params: { 
-      game_point: {
-        is_first_player_win: false, 
-        match_id: @match.id, 
-        game_set_id: @match.game_sets.last.id, 
-        game_gem_id: @match.game_sets.last.game_gems.last.id 
-        }
-      }, class: 'score-button' %>
-    <br><br><br><br><br><br>
-    <button class="resign-button">Predao meč</button>
-  </div>
+  <%= link_to 'Edit', edit_match_path(@match) %> |
+  <%= link_to 'Back', matches_path %>
 </div>
 
 
-<!--
-<p>
-  <strong>Is match started:</strong>
-  <%= @match.is_match_started %>
-</p>
+<script>
+  function handleButtonClick() {
+    // Disable the button to prevent multiple clicks
+    var button1 = document.getElementById("submit-button1");
+    button1.disabled = true;
 
-<p>
-  <strong>Is match finished:</strong>
-  <%= @match.is_match_finished %>
-</p>
+    var button2 = document.getElementById("submit-button2");
+    button2.disabled = true;
 
-<p>
-  <strong>Is first player win:</strong>
-  <%= @match.is_first_player_win %>
-</p>
+    // Perform your desired action here, such as form submission or other functionality
 
-<p>
-  <strong>Is first player surrender:</strong>
-  <%= @match.is_first_player_surrender %>
-</p>
+    // Optional: You can re-enable the button after a certain time if needed
+    setTimeout(function() {
+      button1.disabled = false;
+      button2.disabled = false;
+    }, 3000); // Re-enable the button after 3 seconds (adjust the time as needed)
+  }
 
-<p>
-  <strong>Is second player surrender:</strong>
-  <%= @match.is_second_player_surrender %>
-</p>
--->
+  document.addEventListener("DOMContentLoaded", function () {
+  const submitButton1 = document.getElementById("submit-button1");
 
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
+  if (submitButton1) {
+    submitButton1.addEventListener("click", function () {
+      submitButton1.disabled = true;
+      submitButton1.textContent = "Submitting...";
+    });
+  }
+
+
+    const submitButton2 = document.getElementById("submit-button2");
+
+  if (submitButton2) {
+    submitButton2.addEventListener("click", function () {
+      submitButton2.disabled = true;
+      submitButton2.textContent = "Submitting...";
+    });
+  }
+});
+</script>
+

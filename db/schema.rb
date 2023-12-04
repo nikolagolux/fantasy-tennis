@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_31_212515) do
+ActiveRecord::Schema.define(version: 2023_09_04_205025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2023_07_31_212515) do
     t.boolean "is_first_player_win"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "current_first_player_points"
+    t.string "current_second_player_points"
     t.index ["game_gem_id"], name: "index_game_points_on_game_gem_id"
     t.index ["game_set_id"], name: "index_game_points_on_game_set_id"
     t.index ["match_id"], name: "index_game_points_on_match_id"
@@ -65,6 +67,14 @@ ActiveRecord::Schema.define(version: 2023_07_31_212515) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["first_player_id"], name: "index_matches_on_first_player_id"
     t.index ["second_player_id"], name: "index_matches_on_second_player_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "category"
   end
 
   create_table "users", force: :cascade do |t|

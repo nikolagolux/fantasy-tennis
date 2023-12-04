@@ -22,6 +22,11 @@ class GamePointsController < ApplicationController
   # POST /game_points or /game_points.json
   def create
     @game_point = GamePoint.new(game_point_params)
+
+    # Memorijska lokacija: 
+    # - HDD (database)
+    # - RAM memory
+
     @match = Match.find(params[:game_point][:match_id])
 
     respond_to do |format|

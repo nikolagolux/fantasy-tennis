@@ -1,0 +1,9 @@
+<h2 style="padding-bottom: 25px;">Status meca</h2>
+     
+<% if @match.is_match_started && !@match.is_match_finished %>
+  <p>Mec je startovan</p>
+<% elsif @match.is_match_started && @match.is_match_finished %>
+  <p>Mec je završen</p>
+<% else %>
+  <p>Mec još nije startovan</p>
+<% end %>

@@ -57,6 +57,17 @@ class MatchesController < ApplicationController
     end
   end
 
+  def predaj_match
+    @match_id = params[:match_id]
+    @match = Match.find(@match_id)
+    @match.update(is_first_player_surrender: true, is_match_finished: true)
+    redirect_to prvi_igrac_predao_match_path(match_id: @match_id)
+  end
+
+  def prvi_igrac_predao_match
+    @match_id = params[:match_id]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_match
