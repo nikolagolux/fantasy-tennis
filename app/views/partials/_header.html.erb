@@ -1,0 +1,20 @@
+<header class="header">
+    <a href=<%= root_url %> class="logo">FantasyTennis</a>
+
+    <nav class="navbar">
+      <a href=<%= root_url %>>Home</a>
+      <a href=<%= welcome_about_url %>>About</a>
+      <a href=<%= welcome_info_url %>>Info</a>
+      <a href=<%= welcome_contact_url %>>Contact</a>
+
+      <% if current_user %>
+      <!-- Logged in user: <%= current_user.email %><br /> --->
+        <a href=<%= matches_url %>>Matches</a>
+        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %><br />
+      <% else %>
+        <a href=<%= new_user_session_path %>>Sign in</a>
+        <a href=<%= new_user_registration_path %>>Sign up</a>
+      <% end %>
+
+    </nav>
+</header>

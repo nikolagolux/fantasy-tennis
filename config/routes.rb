@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   
   get 'welcome/index'
   get 'welcome/about'
+  get 'welcome/info'
   get 'welcome/contact'
 
   post 'add_point', to: 'game_points#create'
