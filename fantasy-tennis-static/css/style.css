@@ -1,0 +1,12 @@
+.ft-dark-bg {
+    background-color: #111;
+    color: whitesmoke;
+}
+
+.ft-white-text {
+    color: whitesmoke;
+}
+
+.ft-white-text:hover {
+    color: grey;
+}
